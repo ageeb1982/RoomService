@@ -17,8 +17,8 @@ namespace ageebSoft.RoomService.Models
         [Display(Name ="الطابق")]
         public string Level { set; get; }
 
-        [Display(Name ="المستلم")]
-        public Guid? CustId { set; get; }
-        public Cust Cust { set; get; }
-    }
+        [Display(Name ="المسؤول عنها")]
+        public string CustName { set; get; }
+        public ICollection<Movement> Movements { set; get; }
+     }
 }

@@ -9,7 +9,7 @@ using ageebSoft.RoomService.Data;
 namespace ageebSoft.RoomService.Migrations
 {
     [DbContext(typeof(MyDB))]
-    [Migration("20200302124736_A2020_03_02")]
+    [Migration("14410707181610_A2020_03_02")]
     partial class A2020_03_02
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,12 +18,12 @@ namespace ageebSoft.RoomService.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.14-servicing-32113");
 
-            modelBuilder.Entity("ageebSoft.RoomService.Models.Cust", b =>
+            modelBuilder.Entity("ageebSoft.RoomService.Models.Movement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address");
+                    b.Property<string>("CustName");
 
                     b.Property<DateTime?>("Date1");
 
@@ -31,11 +31,9 @@ namespace ageebSoft.RoomService.Migrations
 
                     b.Property<DateTime?>("Date_Edit");
 
-                    b.Property<string>("Name");
-
                     b.Property<string>("Note");
 
-                    b.Property<string>("Tel");
+                    b.Property<Guid?>("RoomId");
 
                     b.Property<string>("User_Add");
 
@@ -43,7 +41,9 @@ namespace ageebSoft.RoomService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Custs");
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Movements");
                 });
 
             modelBuilder.Entity("ageebSoft.RoomService.Models.Rooms", b =>
@@ -51,7 +51,7 @@ namespace ageebSoft.RoomService.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("CustId");
+                    b.Property<string>("CustName");
 
                     b.Property<DateTime?>("Date1");
 
@@ -73,59 +73,14 @@ namespace ageebSoft.RoomService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustId");
-
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("ageebSoft.RoomService.Models.RoomsMovement", b =>
+            modelBuilder.Entity("ageebSoft.RoomService.Models.Movement", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("CustId");
-
-                    b.Property<DateTime?>("Date1");
-
-                    b.Property<DateTime?>("Date_Add");
-
-                    b.Property<DateTime?>("Date_Edit");
-
-                    b.Property<string>("Note");
-
-                    b.Property<Guid?>("RoomId");
-
-                    b.Property<Guid?>("RoomsId");
-
-                    b.Property<string>("User_Add");
-
-                    b.Property<string>("User_Edit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustId");
-
-                    b.HasIndex("RoomsId");
-
-                    b.ToTable("Movements");
-                });
-
-            modelBuilder.Entity("ageebSoft.RoomService.Models.Rooms", b =>
-                {
-                    b.HasOne("ageebSoft.RoomService.Models.Cust", "Cust")
-                        .WithMany()
-                        .HasForeignKey("CustId");
-                });
-
-            modelBuilder.Entity("ageebSoft.RoomService.Models.RoomsMovement", b =>
-                {
-                    b.HasOne("ageebSoft.RoomService.Models.Cust", "Cust")
-                        .WithMany()
-                        .HasForeignKey("CustId");
-
                     b.HasOne("ageebSoft.RoomService.Models.Rooms", "Rooms")
-                        .WithMany()
-                        .HasForeignKey("RoomsId");
+                        .WithMany("Movements")
+                        .HasForeignKey("RoomId");
                 });
 #pragma warning restore 612, 618
         }

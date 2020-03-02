@@ -10,9 +10,9 @@ namespace ageebSoft.RoomService.Data
     public class MyDB : DbContext
     {
 
-        public DbSet<Cust> Custs { set; get; }
+        //public DbSet<Cust> Custs { set; get; }
         public DbSet<Rooms> Rooms { set; get; }
-        public DbSet<RoomsMovement> Movements { set; get; }
+        public DbSet<Movement> Movements { set; get; }
 
 
         public MyDB(DbContextOptions<MyDB> options)
@@ -23,7 +23,7 @@ namespace ageebSoft.RoomService.Data
             //this.Database.EnsureCreated();
         }
 
-
+        
         /// <summary>
         /// 
         /// </summary>

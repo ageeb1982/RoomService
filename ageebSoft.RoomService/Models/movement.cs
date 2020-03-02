@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ageebSoft.RoomService.Models
 {
-    public class RoomsMovement : MainClass
+    public class Movement:MainClass
     {
-        public Guid? CustId { set; get; }
-        public Cust Cust { set; get; }
+        [Display(Name ="مسؤول الغرفة")]
+        public string CustName { set; get; }
+
 
         public Guid? RoomId { set; get; }
-        public Rooms Rooms {set;get;}
+        [ForeignKey(nameof(RoomId))]
+        public Rooms Rooms { set; get; }
     }
 }
